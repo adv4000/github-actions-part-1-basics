@@ -1,8 +1,11 @@
-#--------------------------------------
-# GitHub Action Part-1 - Basics
+#---------------------------------------------------------------------
+# GitHub Action Workflow Basics
 #
-# Copyleft (c) by Denis Astahov 2019.
-#---------------------------------------
+# Version      Date        Info
+# 1.0          2019        Initial Version
+#
+# Made by Denis Astahov ADV-IT Copyleft (c) 2019
+#---------------------------------------------------------------------
 name: My-GitHubActions-Basics
 env:
   APPLICATION_NAME    : "MyFlask"
