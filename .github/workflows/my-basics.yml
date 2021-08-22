@@ -67,8 +67,3 @@ jobs:
 
     - name: Lets test some packages if they are here 2
       run : zip --version
-      
-      
-
-
-
