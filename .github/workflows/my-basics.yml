@@ -44,7 +44,7 @@ jobs:
     needs: [my_testing]
     env:
       VAR1 : "This is Job Level Variable1"
-      VAR2 : "This is Job Lebel Variable2"
+      VAR2 : "This is Job Level Variable2"
     
     steps:
     - name: Print Hello Message in Deploy
