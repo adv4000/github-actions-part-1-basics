@@ -2,8 +2,7 @@ name: My Custom Gitleaks Workflow
 on:
   pull_request:
   push:
-    branches: 
-      - master
+  workflow_dispatch:
 
 jobs:
   gitleaks_scan:
