@@ -1,0 +1,7 @@
+name: My Custom Gitleaks Workflow
+on:
+  pull_request:
+
+jobs:
+  gitleaks_scan:
+    uses: kkkk4000/VSCode/.github/workflows/gitleaks-template.yml
