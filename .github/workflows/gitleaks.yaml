@@ -1,4 +1,4 @@
-name: My Custom Gitleaks Workflow
+name: Reusable Gitleaks Workflow
 on:
   pull_request:
   push:
