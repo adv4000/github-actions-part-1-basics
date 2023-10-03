@@ -1,9 +1,39 @@
-name: Reusable Gitleaks Workflow
+name: gitleaks
 on:
   pull_request:
   push:
   workflow_dispatch:
 
 jobs:
-  gitleaks_scan:
-    uses: kkkk4000/VSCode/.github/workflows/gitleaks_template.yml
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Notify Slack on leaks
+        if: ${{ failure() }}
+        run: |
+          # Формируем URL экшн GitHub Actions
+          github_run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+          # название репозитория (формат: owner/repo)
+          repo_name="$GITHUB_REPOSITORY"
+          
+          curl -i -s -X POST -H 'Content-type: application/json' --data '{
+            "channel": "#random",
+            "pretext": "*Gitleaks found leaks in the repository*",
+            "text": "Gitleaks detected potential data leaks in the '$repo_name'.\nCheck the action for details:\n<'"$github_run_url"'|View in GitHub>",
+            "icon_url": "https://gitleaks.io/logo.png",
+            "username": "Gitleaks",
+            "link_names": "true",
+            "color": "#FF0000"
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}
